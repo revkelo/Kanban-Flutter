@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tareas Rápidas — Kanban simple</title>
+  <meta name="description" content="App Kanban minimalista para crear, ordenar y avanzar tareas con fechas de vencimiento.">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="icon" type="image/png" href="assets/Tareas_Rapidas.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-slate-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-white/80 backdrop-blur border-b">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <img src="assets/Tareas_Rapidas.png" alt="icono" class="w-9 h-9 rounded-xl">
+      <div class="font-semibold">Tareas Rápidas</div>
+      <nav class="ml-auto hidden md:flex gap-6 text-sm">
+        <a href="#features" class="hover:text-teal-700">Características</a>
+        <a href="#screens" class="hover:text-teal-700">Capturas</a>
+        <a href="#faq" class="hover:text-teal-700">FAQ</a>
+      </nav>
+      <a href="#descargar" class="ml-3 px-4 py-2 rounded-xl bg-teal-600 text-white text-sm hover:bg-teal-700">Descargar</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-teal-50 to-white">
+    <div class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 items-center gap-10">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
+          Kanban simple, rápido y sin distracciones
+        </h1>
+        <p class="mt-4 text-lg text-slate-600">
+          Crea tarjetas, organiza por <em>Backlog</em>, <em>En progreso</em> y <em>Hecho</em>, agrega vencimientos
+          y avanza con un tap. Todo en una interfaz limpia y fluida.
+        </p>
+        <div id="descargar" class="mt-6 flex flex-wrap gap-3">
+          <a href="#" class="px-5 py-3 rounded-xl bg-teal-600 text-white font-semibold hover:bg-teal-700">Descargar APK</a>
+          <a href="#" class="px-5 py-3 rounded-xl border border-slate-300 hover:border-teal-600 hover:text-teal-700">Ver en AppGallery</a>
+        </div>
+        <ul class="mt-6 grid grid-cols-2 gap-3 text-slate-600 text-sm">
+          <li class="flex items-center gap-2"><span class="w-2 h-2 bg-teal-600 rounded-full"></span> Sin registro</li>
+          <li class="flex items-center gap-2"><span class="w-2 h-2 bg-teal-600 rounded-full"></span> Guarda localmente</li>
+          <li class="flex items-center gap-2"><span class="w-2 h-2 bg-teal-600 rounded-full"></span> Modo oscuro del sistema</li>
+          <li class="flex items-center gap-2"><span class="w-2 h-2 bg-teal-600 rounded-full"></span> Orden y búsqueda</li>
+        </ul>
+      </div>
+      <div class="relative">
+        <div class="rounded-3xl ring-1 ring-slate-200 shadow-xl overflow-hidden">
+          <img src="assets/1.jpg" class="w-full object-cover" alt="captura principal">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold">Características</h2>
+      <p class="mt-2 text-slate-600">Pensada para usarse al instante, sin cuentas ni complejidad.</p>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border shadow-sm">
+          <h3 class="font-semibold">Crear tarjetas al vuelo</h3>
+          <p class="mt-2 text-sm text-slate-600">Añade título, descripción y fecha de vencimiento desde un solo diálogo.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-sm">
+          <h3 class="font-semibold">Avanza por estados</h3>
+          <p class="mt-2 text-sm text-slate-600">Mueve una tarea de Backlog → En progreso → Hecho con un toque.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-sm">
+          <h3 class="font-semibold">Búsqueda y orden</h3>
+          <p class="mt-2 text-sm text-slate-600">Filtra por texto y ordena por creación, vencimiento o título.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-sm">
+          <h3 class="font-semibold">Ligera y offline</h3>
+          <p class="mt-2 text-sm text-slate-600">Tus datos se guardan localmente y la app funciona sin internet.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-sm">
+          <h3 class="font-semibold">Interfaz accesible</h3>
+          <p class="mt-2 text-sm text-slate-600">Tipografía clara, tamaños cómodos y buen contraste.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-sm">
+          <h3 class="font-semibold">Privacidad primero</h3>
+          <p class="mt-2 text-sm text-slate-600">No pedimos permisos ni cuentas. Tú controlas tu información.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screens -->
+  <section id="screens" class="py-16 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold">Capturas</h2>
+      <p class="mt-2 text-slate-600">Así luce en Android.</p>
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/1.jpg">
+  <img src="assets/1.jpg" alt="Captura 1" class="w-full h-72 object-cover" loading="lazy">
+</button>
+<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/2.jpg">
+  <img src="assets/2.jpg" alt="Captura 2" class="w-full h-72 object-cover" loading="lazy">
+</button>
+<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/3.jpg">
+  <img src="assets/3.jpg" alt="Captura 3" class="w-full h-72 object-cover" loading="lazy">
+</button>
+<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/4.jpg">
+  <img src="assets/4.jpg" alt="Captura 4" class="w-full h-72 object-cover" loading="lazy">
+</button>
+<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/5.jpg">
+  <img src="assets/5.jpg" alt="Captura 5" class="w-full h-72 object-cover" loading="lazy">
+</button>
+<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/Tareas_Rapidas.png">
+  <img src="assets/Tareas_Rapidas.png" alt="Captura 6" class="w-full h-72 object-cover" loading="lazy">
+</button>
+<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/A_flat_vector_graphic_icon_features_three_vertical.png">
+  <img src="assets/A_flat_vector_graphic_icon_features_three_vertical.png" alt="Captura 7" class="w-full h-72 object-cover" loading="lazy">
+</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold">Preguntas frecuentes</h2>
+      <div class="mt-6 space-y-6">
+        <details class="group border rounded-2xl p-4">
+          <summary class="font-medium cursor-pointer">¿Necesito crear una cuenta?</summary>
+          <p class="mt-2 text-slate-600">No. Todo se guarda de forma local en tu dispositivo.</p>
+        </details>
+        <details class="group border rounded-2xl p-4">
+          <summary class="font-medium cursor-pointer">¿Puedo exportar mis datos?</summary>
+          <p class="mt-2 text-slate-600">Próximamente añadiremos exportación a JSON/CSV.</p>
+        </details>
+        <details class="group border rounded-2xl p-4">
+          <summary class="font-medium cursor-pointer">¿Qué permisos usa?</summary>
+          <p class="mt-2 text-slate-600">Ninguno especial. Solo almacenamiento local de la app.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t">
+    <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between gap-3 text-sm text-slate-600">
+      <div>© 2025 Tareas Rápidas</div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="hover:text-teal-700">Política de privacidad</a>
+        <a href="#" class="hover:text-teal-700">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-4 z-50">
+    <button id="closeLb" class="absolute top-4 right-4 text-white text-2xl" aria-label="Cerrar">✕</button>
+    <img id="lbImg" src="" class="max-h-[90vh] max-w-[90vw] rounded-2xl shadow-2xl" alt="captura ampliada">
+  </div>
+
+  <script>
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const closeLb = document.getElementById('closeLb');
+    document.querySelectorAll('[data-full]').forEach(b => {
+      b.addEventListener('click', () => {
+        lbImg.src = b.dataset.full;
+        lb.classList.remove('hidden');
+        lb.classList.add('flex');
+      });
+    });
+    function hideLb(){ lb.classList.add('hidden'); lb.classList.remove('flex'); }
+    closeLb.addEventListener('click', hideLb);
+    lb.addEventListener('click', (e) => { if(e.target===lb) hideLb(); });
+  </script>
+</body>
+</html>
