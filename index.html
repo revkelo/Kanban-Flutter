@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tareas Rápidas — Kanban simple</title>
-  <meta name="description" content="App Kanban minimalista para crear, ordenar y avanzar tareas con fechas de vencimiento.">
+  <title>KanbanApp — Gestión rápida de tareas offline</title>
+  <meta name="description" content="KanbanApp: tablero Kanban simple para crear, organizar y completar tareas sin cuenta y sin conexión.">
   <link rel="manifest" href="site.webmanifest">
   <link rel="icon" type="image/png" href="assets/Tareas_Rapidas.png">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,140 +13,477 @@
   <!-- Header -->
   <header class="sticky top-0 z-30 bg-white/80 backdrop-blur border-b">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
-      <img src="assets/Tareas_Rapidas.png" alt="icono" class="w-9 h-9 rounded-xl">
-      <div class="font-semibold">Tareas Rápidas</div>
+      <img src="assets/Tareas_Rapidas.png" alt="Icono KanbanApp" class="w-9 h-9 rounded-xl">
+      <div class="font-semibold text-slate-900">KanbanApp</div>
+
       <nav class="ml-auto hidden md:flex gap-6 text-sm">
         <a href="#features" class="hover:text-teal-700">Características</a>
         <a href="#screens" class="hover:text-teal-700">Capturas</a>
         <a href="#faq" class="hover:text-teal-700">FAQ</a>
+        <a href="#privacy" class="hover:text-teal-700">Privacidad</a>
       </nav>
+
       <a href="#descargar" class="ml-3 px-4 py-2 rounded-xl bg-teal-600 text-white text-sm hover:bg-teal-700">Descargar</a>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="bg-gradient-to-b from-teal-50 to-white">
-    <div class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 items-center gap-10">
-      <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-          Kanban simple, rápido y sin distracciones
-        </h1>
-        <p class="mt-4 text-lg text-slate-600">
-          Crea tarjetas, organiza por <em>Backlog</em>, <em>En progreso</em> y <em>Hecho</em>, agrega vencimientos
-          y avanza con un tap. Todo en una interfaz limpia y fluida.
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-teal-50 to-white">
+      <div class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 items-center gap-10">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
+            KanbanApp: tareas claras, cero distracciones
+          </h1>
+          <p class="mt-4 text-lg text-slate-600">
+            Crea tarjetas, muévalas entre <em>Backlog</em>, <em>En progreso</em> y <em>Hecho</em>, marca vencimientos
+            y mantén el control visual de tu día. Todo rápido y sin necesidad de registrarte.
+          </p>
+          <div id="descargar" class="mt-6 flex flex-wrap gap-3">
+            <a href="#" class="px-5 py-3 rounded-xl bg-teal-600 text-white font-semibold hover:bg-teal-700">
+              Descargar APK
+            </a>
+            <a href="#" class="px-5 py-3 rounded-xl border border-slate-300 hover:border-teal-600 hover:text-teal-700">
+              Ver en AppGallery
+            </a>
+          </div>
+          <ul class="mt-6 grid grid-cols-2 gap-3 text-slate-600 text-sm">
+            <li class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-teal-600 rounded-full"></span> Sin registro
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-teal-600 rounded-full"></span> Datos guardados localmente
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-teal-600 rounded-full"></span> Modo oscuro del sistema
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-teal-600 rounded-full"></span> Búsqueda y orden
+            </li>
+          </ul>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-3xl ring-1 ring-slate-200 shadow-xl overflow-hidden">
+            <img src="assets/1.jpg" class="w-full object-cover" alt="Vista general de KanbanApp">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-slate-900">Características</h2>
+        <p class="mt-2 text-slate-600">
+          Pensada para usarse al instante, sin cuentas ni complejidad innecesaria.
         </p>
-        <div id="descargar" class="mt-6 flex flex-wrap gap-3">
-          <a href="#" class="px-5 py-3 rounded-xl bg-teal-600 text-white font-semibold hover:bg-teal-700">Descargar APK</a>
-          <a href="#" class="px-5 py-3 rounded-xl border border-slate-300 hover:border-teal-600 hover:text-teal-700">Ver en AppGallery</a>
-        </div>
-        <ul class="mt-6 grid grid-cols-2 gap-3 text-slate-600 text-sm">
-          <li class="flex items-center gap-2"><span class="w-2 h-2 bg-teal-600 rounded-full"></span> Sin registro</li>
-          <li class="flex items-center gap-2"><span class="w-2 h-2 bg-teal-600 rounded-full"></span> Guarda localmente</li>
-          <li class="flex items-center gap-2"><span class="w-2 h-2 bg-teal-600 rounded-full"></span> Modo oscuro del sistema</li>
-          <li class="flex items-center gap-2"><span class="w-2 h-2 bg-teal-600 rounded-full"></span> Orden y búsqueda</li>
-        </ul>
-      </div>
-      <div class="relative">
-        <div class="rounded-3xl ring-1 ring-slate-200 shadow-xl overflow-hidden">
-          <img src="assets/1.jpg" class="w-full object-cover" alt="captura principal">
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Features -->
-  <section id="features" class="py-16">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold">Características</h2>
-      <p class="mt-2 text-slate-600">Pensada para usarse al instante, sin cuentas ni complejidad.</p>
-      <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border shadow-sm">
-          <h3 class="font-semibold">Crear tarjetas al vuelo</h3>
-          <p class="mt-2 text-sm text-slate-600">Añade título, descripción y fecha de vencimiento desde un solo diálogo.</p>
-        </div>
-        <div class="p-6 rounded-2xl border shadow-sm">
-          <h3 class="font-semibold">Avanza por estados</h3>
-          <p class="mt-2 text-sm text-slate-600">Mueve una tarea de Backlog → En progreso → Hecho con un toque.</p>
-        </div>
-        <div class="p-6 rounded-2xl border shadow-sm">
-          <h3 class="font-semibold">Búsqueda y orden</h3>
-          <p class="mt-2 text-sm text-slate-600">Filtra por texto y ordena por creación, vencimiento o título.</p>
-        </div>
-        <div class="p-6 rounded-2xl border shadow-sm">
-          <h3 class="font-semibold">Ligera y offline</h3>
-          <p class="mt-2 text-sm text-slate-600">Tus datos se guardan localmente y la app funciona sin internet.</p>
-        </div>
-        <div class="p-6 rounded-2xl border shadow-sm">
-          <h3 class="font-semibold">Interfaz accesible</h3>
-          <p class="mt-2 text-sm text-slate-600">Tipografía clara, tamaños cómodos y buen contraste.</p>
-        </div>
-        <div class="p-6 rounded-2xl border shadow-sm">
-          <h3 class="font-semibold">Privacidad primero</h3>
-          <p class="mt-2 text-sm text-slate-600">No pedimos permisos ni cuentas. Tú controlas tu información.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl border shadow-sm">
+            <h3 class="font-semibold text-slate-900">Crear tarjetas al vuelo</h3>
+            <p class="mt-2 text-sm text-slate-600">
+              Añade título, descripción y fecha de vencimiento desde un solo diálogo.
+            </p>
+          </div>
 
-  <!-- Screens -->
-  <section id="screens" class="py-16 bg-slate-50">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold">Capturas</h2>
-      <p class="mt-2 text-slate-600">Así luce en Android.</p>
-      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/1.jpg">
-  <img src="assets/1.jpg" alt="Captura 1" class="w-full h-72 object-cover" loading="lazy">
-</button>
-<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/2.jpg">
-  <img src="assets/2.jpg" alt="Captura 2" class="w-full h-72 object-cover" loading="lazy">
-</button>
-<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/3.jpg">
-  <img src="assets/3.jpg" alt="Captura 3" class="w-full h-72 object-cover" loading="lazy">
-</button>
-<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/4.jpg">
-  <img src="assets/4.jpg" alt="Captura 4" class="w-full h-72 object-cover" loading="lazy">
-</button>
-<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/5.jpg">
-  <img src="assets/5.jpg" alt="Captura 5" class="w-full h-72 object-cover" loading="lazy">
-</button>
-<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/Tareas_Rapidas.png">
-  <img src="assets/Tareas_Rapidas.png" alt="Captura 6" class="w-full h-72 object-cover" loading="lazy">
-</button>
-<button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/A_flat_vector_graphic_icon_features_three_vertical.png">
-  <img src="assets/A_flat_vector_graphic_icon_features_three_vertical.png" alt="Captura 7" class="w-full h-72 object-cover" loading="lazy">
-</button>
-      </div>
-    </div>
-  </section>
+          <div class="p-6 rounded-2xl border shadow-sm">
+            <h3 class="font-semibold text-slate-900">Flujo visual claro</h3>
+            <p class="mt-2 text-sm text-slate-600">
+              Mueve una tarea de Backlog → En progreso → Hecho con un toque.
+            </p>
+          </div>
 
-  <!-- FAQ -->
-  <section id="faq" class="py-16">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold">Preguntas frecuentes</h2>
-      <div class="mt-6 space-y-6">
-        <details class="group border rounded-2xl p-4">
-          <summary class="font-medium cursor-pointer">¿Necesito crear una cuenta?</summary>
-          <p class="mt-2 text-slate-600">No. Todo se guarda de forma local en tu dispositivo.</p>
-        </details>
-        <details class="group border rounded-2xl p-4">
-          <summary class="font-medium cursor-pointer">¿Puedo exportar mis datos?</summary>
-          <p class="mt-2 text-slate-600">Próximamente añadiremos exportación a JSON/CSV.</p>
-        </details>
-        <details class="group border rounded-2xl p-4">
-          <summary class="font-medium cursor-pointer">¿Qué permisos usa?</summary>
-          <p class="mt-2 text-slate-600">Ninguno especial. Solo almacenamiento local de la app.</p>
-        </details>
+          <div class="p-6 rounded-2xl border shadow-sm">
+            <h3 class="font-semibold text-slate-900">Búsqueda y orden</h3>
+            <p class="mt-2 text-sm text-slate-600">
+              Filtra por texto y organiza por creación, vencimiento o título.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm">
+            <h3 class="font-semibold text-slate-900">Ligera y offline</h3>
+            <p class="mt-2 text-sm text-slate-600">
+              La app funciona sin conexión. La información vive en tu dispositivo.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm">
+            <h3 class="font-semibold text-slate-900">Interfaz accesible</h3>
+            <p class="mt-2 text-sm text-slate-600">
+              Tipografía clara, tamaños cómodos y buen contraste para leer rápido.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm">
+            <h3 class="font-semibold text-slate-900">Privacidad primero</h3>
+            <p class="mt-2 text-sm text-slate-600">
+              No pedimos login. No subimos tus tareas a servidores externos.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Screens -->
+    <section id="screens" class="py-16 bg-slate-50">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-slate-900">Capturas</h2>
+        <p class="mt-2 text-slate-600">Capturas reales de KanbanApp en Android.</p>
+
+        <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/1.jpg">
+            <img src="assets/1.jpg" alt="Tablero KanbanApp" class="w-full h-72 object-cover" loading="lazy">
+          </button>
+
+          <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/2.jpg">
+            <img src="assets/2.jpg" alt="Columna En progreso" class="w-full h-72 object-cover" loading="lazy">
+          </button>
+
+          <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/3.jpg">
+            <img src="assets/3.jpg" alt="Detalle de tarea con vencimiento" class="w-full h-72 object-cover" loading="lazy">
+          </button>
+
+          <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/4.jpg">
+            <img src="assets/4.jpg" alt="Búsqueda y orden" class="w-full h-72 object-cover" loading="lazy">
+          </button>
+
+          <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/5.jpg">
+            <img src="assets/5.jpg" alt="Modo oscuro del sistema" class="w-full h-72 object-cover" loading="lazy">
+          </button>
+
+          <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/Tareas_Rapidas.png">
+            <img src="assets/Tareas_Rapidas.png" alt="Icono KanbanApp" class="w-full h-72 object-cover" loading="lazy">
+          </button>
+
+          <button class="rounded-2xl overflow-hidden shadow hover:shadow-lg focus:outline-none focus:ring" data-full="assets/A_flat_vector_graphic_icon_features_three_vertical.png">
+            <img src="assets/A_flat_vector_graphic_icon_features_three_vertical.png" alt="Ilustración KanbanApp" class="w-full h-72 object-cover" loading="lazy">
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-slate-900">Preguntas frecuentes</h2>
+
+        <div class="mt-6 space-y-6">
+          <details class="group border rounded-2xl p-4">
+            <summary class="font-medium cursor-pointer text-slate-900">
+              ¿Necesito crear una cuenta?
+            </summary>
+            <p class="mt-2 text-slate-600">
+              No. KanbanApp funciona sin registro y no solicita inicio de sesión.
+            </p>
+          </details>
+
+          <details class="group border rounded-2xl p-4">
+            <summary class="font-medium cursor-pointer text-slate-900">
+              ¿Dónde se guardan mis tareas?
+            </summary>
+            <p class="mt-2 text-slate-600">
+              Todo se guarda localmente en tu dispositivo. No enviamos tus notas a ningún servidor.
+            </p>
+          </details>
+
+          <details class="group border rounded-2xl p-4">
+            <summary class="font-medium cursor-pointer text-slate-900">
+              ¿Puedo exportar mis datos?
+            </summary>
+            <p class="mt-2 text-slate-600">
+              Actualmente, el contenido vive en tu teléfono. Tú tienes el control total. (Cuando ofrezcamos exportación,
+              se mostrará claramente dentro de la app).
+            </p>
+          </details>
+
+          <details class="group border rounded-2xl p-4">
+            <summary class="font-medium cursor-pointer text-slate-900">
+              ¿Qué permisos usa?
+            </summary>
+            <p class="mt-2 text-slate-600">
+              No pedimos permisos especiales. Solo utilizamos almacenamiento interno de la propia app para guardar tus tareas.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy / Política de Privacidad -->
+    <section id="privacy" class="py-16 bg-slate-100 border-t border-slate-200">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-slate-900">Política de Privacidad / Privacy Policy / 隐私政策</h2>
+        <p class="mt-2 text-slate-600 text-sm">
+          Última actualización: 25 Oct 2025
+        </p>
+
+        <!-- Español -->
+        <div class="mt-8 p-6 bg-white rounded-2xl shadow border">
+          <h3 class="text-xl font-semibold text-slate-900">Resumen en español</h3>
+          <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+            KanbanApp (“la App”) es desarrollada y ofrecida por el desarrollador (“nosotros”).
+            Esta Política de Privacidad explica cómo se maneja tu información.
+            KanbanApp está pensada para funcionar sin registro y sin conexión: las tareas se guardan localmente
+            en tu dispositivo y no se suben automáticamente a ningún servidor.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">1. Información que se guarda</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • Tareas, títulos, descripciones y fechas de vencimiento que tú escribes.<br>
+            • Preferencias locales de la app (por ejemplo modo oscuro, orden, filtros).<br>
+            • Información técnica básica del dispositivo (versión de Android, idioma) que el sistema Android ya proporciona internamente para que la app funcione correctamente.
+          </p>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            No solicitamos inicio de sesión, correo, número de teléfono ni datos sensibles de identidad.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">2. Para qué usamos esa información</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • Mostrar tus tareas en el tablero Kanban (Backlog / En progreso / Hecho).<br>
+            • Permitir búsqueda, orden y marcado de vencimientos.<br>
+            • Mejorar estabilidad y funcionamiento básico de la app.
+          </p>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            No vendemos tu información personal.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">3. Compartición de datos</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • No enviamos automáticamente tus tareas a servidores de terceros.<br>
+            • No compartimos tus tareas con anunciantes.<br>
+            • Solo podríamos compartir información si la ley lo exige (por ejemplo, una orden legal válida).
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">4. Retención y control</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • Tus datos viven en tu dispositivo hasta que tú los borres o desinstales la app.<br>
+            • Si borras una tarea dentro de la app, se elimina de tu almacenamiento local.<br>
+            • Si desinstalas la app, Android elimina los datos locales asociados.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">5. Tus derechos</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            Según la ley aplicable, puedes: (a) acceder a tu información (ya visible en la app), (b) editarla o
+            borrarla manualmente, (c) desinstalar la app para eliminarla del dispositivo.
+            Si en el futuro agregamos funciones en la nube o cuenta, incluiremos opciones adicionales de acceso,
+            corrección y eliminación.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">6. Seguridad</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            Protegemos los datos usando el almacenamiento interno/local del sistema operativo. Aun así,
+            ningún sistema es 100% invulnerable. Recomendamos mantener tu dispositivo bloqueado y actualizado.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">7. Menores de edad</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            KanbanApp no está dirigida a menores por debajo de la edad mínima legal local para dar
+            consentimiento digital sin tutor. No recopilamos conscientemente información personal de menores.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">8. Contacto</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            Si tienes preguntas sobre privacidad o quieres ejercer derechos de acceso/borrado cuando haya
+            funciones en la nube, escríbenos a:
+            <br>
+            <strong>support@kanbanapp.app</strong>
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">9. Cambios de esta política</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            Si actualizamos esta Política de Privacidad, lo indicaremos aquí con una nueva fecha de “Última actualización”.
+            El uso continuo de la app después de un cambio implica que aceptas la versión actualizada.
+          </p>
+        </div>
+
+        <!-- English -->
+        <div class="mt-8 p-6 bg-white rounded-2xl shadow border">
+          <h3 class="text-xl font-semibold text-slate-900">English Summary</h3>
+          <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+            KanbanApp (“the App”) is provided by the developer (“we”, “us”).
+            This Privacy Policy explains how your information is handled.
+            KanbanApp is designed to run offline with no account: your tasks are stored locally on your device and
+            are not automatically uploaded to any external server.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">1. Information we store</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • Task titles, descriptions, and due dates you create.<br>
+            • Local app preferences (theme, sorting, filters).<br>
+            • Basic device/app info (Android version, language) required for the app to function.
+          </p>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            We do not ask you to sign in and we do not request personal identifiers such as phone number or email to use the core features.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">2. How we use this information</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • Display your tasks in Backlog / In Progress / Done columns.<br>
+            • Provide search, sorting and due date reminders/visibility.<br>
+            • Maintain stability and core functionality of the App.
+          </p>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            We do not sell your personal information.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">3. Sharing</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • We do not automatically send your tasks to third-party servers.<br>
+            • We do not share your tasks with advertisers.<br>
+            • We may disclose limited information if required by applicable law or to protect legal rights and safety.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">4. Retention and control</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • Your data stays on your phone until you delete it or uninstall the App.<br>
+            • Deleting a task removes it from local storage.<br>
+            • Uninstalling the App removes its local data from the device.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">5. Your rights</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            Depending on local law, you may: (a) view your data directly in the App,
+            (b) edit or delete it yourself, and (c) uninstall the App to remove it from the device.
+            If we add cloud sync or accounts later, we will add options for access, correction, and deletion requests.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">6. Security</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            We rely on the device’s internal storage. No system is 100% secure, so please keep your device locked,
+            updated, and protected.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">7. Children</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            KanbanApp is not directed at children below the minimum legal age for digital consent.
+            We do not knowingly collect personal information from children.
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">8. Contact</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            If you have privacy questions or wish to exercise access/deletion rights when online features become available,
+            contact us at:
+            <br>
+            <strong>support@kanbanapp.app</strong>
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">9. Changes</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            We may update this Policy. We will post the new “Last updated” date above.
+            Continued use of the App after changes means you accept the updated Policy.
+          </p>
+        </div>
+
+        <!-- 简体中文 -->
+        <div class="mt-8 p-6 bg-white rounded-2xl shadow border">
+          <h3 class="text-xl font-semibold text-slate-900">简体中文（中国大陆适用）</h3>
+          <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+            KanbanApp（“本应用”）由开发者（“我们”）提供。
+            本隐私政策说明我们如何处理您的信息。
+            KanbanApp 旨在本地离线运行：无需注册账号，您的任务数据仅保存在您的设备本地，
+            不会自动上传到外部服务器。
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">1. 我们保存的信息</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • 您创建的任务标题、描述、到期日期；<br>
+            • 本地偏好设置（例如深色模式、排序方式、筛选条件）；<br>
+            • 设备/系统的基本信息（Android 版本、语言）用于保证应用的正常运行。
+          </p>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            我们不会要求您登录；不会强制收集电话号码、邮箱等可识别个人身份的信息来提供核心功能。
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">2. 我们如何使用这些信息</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • 在“待办 / 进行中 / 已完成”列中显示您的任务；<br>
+            • 提供搜索、排序和到期提醒/可视标记；<br>
+            • 保障应用的基本稳定性和功能。
+          </p>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            我们不会出售您的个人信息。
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">3. 信息共享</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • 我们不会自动将您的任务上传到第三方服务器；<br>
+            • 我们不会向广告商分享您的任务内容；<br>
+            • 仅在法律法规要求或为保护合法权益/人身安全的情况下，我们才可能向相关机构披露必要信息。
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">4. 保存期限与控制权</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            • 您的数据会一直保存在您的手机上，直到您手动删除或卸载本应用；<br>
+            • 在应用中删除任务，即会从本地存储中删除该任务；<br>
+            • 卸载应用时，系统会同时删除其本地数据。
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">5. 您的权利</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            根据适用法律，您可以：（a）直接在应用中查看您的数据；（b）自行修改或删除；
+            （c）通过卸载应用让设备移除这些数据。
+            如果未来我们提供云端同步或账号功能，我们会同时提供访问、更正与删除请求的渠道。
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">6. 安全</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            我们依赖设备本地存储来保存数据。请注意，任何系统都无法保证 100% 安全，
+            建议您为设备设置锁屏密码并保持系统更新。
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">7. 未成年人保护</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            本应用并非专门面向未达到本地法律所规定的可独立同意年龄的未成年人。
+            我们不会在明知对方为未成年人的情况下主动收集其个人信息。
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">8. 联系方式</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            如您对隐私有任何疑问，或在未来出现云端功能时希望行使访问/删除等权利，
+            请联系我们：
+            <br>
+            <strong>support@kanbanapp.app</strong>
+          </p>
+
+          <h4 class="mt-6 font-semibold text-slate-900">9. 政策更新</h4>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            我们可能会更新本隐私政策。更新后，我们会在本页面上展示最新的“最后更新”日期。
+            您继续使用本应用即表示您接受更新后的政策。
+          </p>
+        </div>
+
+        <!-- Consent notice preview (for AppGallery rule 7.5) -->
+        <div class="mt-8 p-6 bg-white rounded-2xl shadow border">
+          <h3 class="text-xl font-semibold text-slate-900">Aviso inicial dentro de la app (cumplimiento 7.5)</h3>
+          <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+            Al primer inicio de KanbanApp (y antes de registrarse/iniciar sesión si en el futuro agregamos cuenta),
+            se mostrará un aviso emergente que dice:
+          </p>
+          <div class="mt-4 text-sm text-slate-700 leading-relaxed border rounded-xl p-4 bg-slate-50">
+            <strong>ES:</strong> “Recopilamos y guardamos tus tareas de forma local en este dispositivo
+            para que puedas usar las funciones de KanbanApp (tablero Kanban, búsqueda y recordatorios de vencimiento).
+            Lee la Política de Privacidad para conocer tus derechos. Al pulsar ‘Aceptar’, confirmas que has leído y aceptas.”
+            <br><br>
+            <strong>简体中文:</strong> “我们会在本设备本地保存您的任务数据，以便为您提供 KanbanApp
+            的核心功能（看板任务管理、搜索、到期提醒）。请阅读《隐私政策》了解您的权利。
+            点击‘同意’即表示您已阅读并同意。”
+          </div>
+          <p class="mt-4 text-xs text-slate-500">
+            Este aviso cumple el requisito de Huawei de mostrar la política de privacidad claramente en el primer uso.
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="py-10 border-t">
+  <footer class="py-10 border-t bg-white">
     <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between gap-3 text-sm text-slate-600">
-      <div>© 2025 Tareas Rápidas</div>
+      <div>© 2025 KanbanApp</div>
       <div class="flex items-center gap-3">
-        <a href="#" class="hover:text-teal-700">Política de privacidad</a>
-        <a href="#" class="hover:text-teal-700">Contacto</a>
+        <a href="#privacy" class="hover:text-teal-700">Política de privacidad</a>
+        <a href="mailto:support@kanbanapp.app" class="hover:text-teal-700">Contacto</a>
       </div>
     </div>
   </footer>
@@ -161,6 +498,7 @@
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
     const closeLb = document.getElementById('closeLb');
+
     document.querySelectorAll('[data-full]').forEach(b => {
       b.addEventListener('click', () => {
         lbImg.src = b.dataset.full;
@@ -168,9 +506,17 @@
         lb.classList.add('flex');
       });
     });
-    function hideLb(){ lb.classList.add('hidden'); lb.classList.remove('flex'); }
+
+    function hideLb(){
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+    }
+
     closeLb.addEventListener('click', hideLb);
-    lb.addEventListener('click', (e) => { if(e.target===lb) hideLb(); });
+
+    lb.addEventListener('click', (e) => {
+      if(e.target===lb) hideLb();
+    });
   </script>
 </body>
 </html>
