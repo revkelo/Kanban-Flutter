@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await KanbanNotifier.init(); // inicializar canal de notificaciones
   runApp(const KanbanApp());
 }
 
@@ -107,11 +110,107 @@ class Tarea {
     id: j['id'] as String,
     titulo: j['titulo'] as String,
     descripcion: j['descripcion'] as String?,
-    vence:
-    (j['vence'] as String?) != null ? DateTime.parse(j['vence']) : null,
+    vence: (j['vence'] as String?) != null
+        ? DateTime.parse(j['vence'])
+        : null,
     estado: estadoFromString(j['estado'] as String),
     creada: DateTime.parse(j['creada'] as String),
   );
+}
+
+/* ===================== NOTIFICACIONES LOCALES ===================== */
+
+class KanbanNotifier {
+  static final FlutterLocalNotificationsPlugin _plugin =
+  FlutterLocalNotificationsPlugin();
+
+  // Canal Android
+  static const AndroidNotificationChannel _dueChannel =
+  AndroidNotificationChannel(
+    'kanban_due', // id interno
+    'Tareas por vencer', // nombre visible en ajustes
+    description: 'Recordatorios de vencimiento de tareas',
+    importance: Importance.high,
+    playSound: true,
+  );
+
+  static Future<void> init() async {
+    // Inicialización por plataforma (solo Android en este caso)
+    const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initSettings = InitializationSettings(android: androidInit);
+    await _plugin.initialize(initSettings);
+
+    // Crear canal Android
+    await _plugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(_dueChannel);
+  }
+
+  /// Revisa todas las tareas. Si alguna vence pronto / está vencida,
+  /// dispara una notificación (una sola vez por cada tarea).
+  static Future<void> checkAndNotify(
+      Map<Estado, List<Tarea>> tablero) async {
+    final now = DateTime.now();
+    final cutoffSoon = now.add(const Duration(hours: 24));
+    final notifiedIds = await KanbanPrefs.getNotifiedIds();
+
+    // Recorremos todas las tareas excepto las que ya están en "hecho"
+    for (final estado in [Estado.backlog, Estado.progreso]) {
+      final lista = tablero[estado] ?? [];
+      for (final t in lista) {
+        if (t.vence == null) continue;
+
+        final due = t.vence!;
+        final yaVencio = due.isBefore(now);
+        final vencePronto = !yaVencio && due.isBefore(cutoffSoon);
+
+        if (!yaVencio && !vencePronto) continue;
+
+        // ¿Ya notificada antes?
+        if (notifiedIds.contains(t.id)) continue;
+
+        // Mensaje
+        final String tituloNotif;
+        final String cuerpoNotif;
+        if (yaVencio) {
+          tituloNotif = 'Tarea vencida';
+          cuerpoNotif =
+          '“${t.titulo}” debía hacerse el ${_fmtFechaCorta(due)}.';
+        } else {
+          // vence hoy o en <24h
+          tituloNotif = 'Tarea por vencer';
+          cuerpoNotif =
+          '“${t.titulo}” vence el ${_fmtFechaCorta(due)}. No la dejes pasar.';
+        }
+
+        // ID numérico estable a partir del hash del string
+        final int notifId = t.id.hashCode & 0x7fffffff;
+
+        final androidDetails = AndroidNotificationDetails(
+          _dueChannel.id,
+          _dueChannel.name,
+          channelDescription: _dueChannel.description,
+          importance: Importance.high,
+          priority: Priority.high,
+          playSound: true,
+          icon: '@mipmap/ic_launcher',
+        );
+
+        final details = NotificationDetails(android: androidDetails);
+
+        await _plugin.show(
+          notifId,
+          tituloNotif,
+          cuerpoNotif,
+          details,
+        );
+
+        // Guardar que ya notificamos esta tarea
+        await KanbanPrefs.addNotifiedId(t.id);
+      }
+    }
+  }
 }
 
 /* ===================== PREFERENCIAS LOCALES (AJUSTES & STORAGE) ===================== */
@@ -122,6 +221,9 @@ class KanbanPrefs {
   static const _privacyAcceptedKey = 'privacyAccepted_v1';
   static const _confirmDeleteKey = 'confirmDelete_v1';
   static const _accentColorKey = 'accentColor_v1';
+
+  // nuevo: para evitar notificaciones duplicadas
+  static const _notifiedIdsKey = 'kanban_notified_v1';
 
   // ===== tareas =====
   static Future<Map<Estado, List<Tarea>>> loadBoard() async {
@@ -156,6 +258,22 @@ class KanbanPrefs {
         estadoToString(e): tablero[e]!.map((t) => t.toJson()).toList(),
     };
     await sp.setString(_storeKeyTareas, jsonEncode(data));
+  }
+
+  // ===== ids ya notificados =====
+  static Future<Set<String>> getNotifiedIds() async {
+    final sp = await SharedPreferences.getInstance();
+    final list = sp.getStringList(_notifiedIdsKey) ?? <String>[];
+    return list.toSet();
+  }
+
+  static Future<void> addNotifiedId(String id) async {
+    final sp = await SharedPreferences.getInstance();
+    final list = sp.getStringList(_notifiedIdsKey) ?? <String>[];
+    if (!list.contains(id)) {
+      list.add(id);
+      await sp.setStringList(_notifiedIdsKey, list);
+    }
   }
 
   // ===== privacidad =====
@@ -279,6 +397,8 @@ class _MainShellState extends State<MainShell>
   SortMode _sortMode = SortMode.creacionAsc;
   String _busqueda = '';
 
+  Timer? _dueTimer; // timer periódico para volver a chequear vencimientos
+
   @override
   void initState() {
     super.initState();
@@ -291,6 +411,7 @@ class _MainShellState extends State<MainShell>
   void dispose() {
     _pageController.dispose();
     _tabController.dispose();
+    _dueTimer?.cancel();
     super.dispose();
   }
 
@@ -306,11 +427,20 @@ class _MainShellState extends State<MainShell>
       _cargando = false;
     });
 
+    // Mostrar popup de privacidad si hace falta
     if (!accepted && mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _maybeShowPrivacyDialog();
       });
     }
+
+    // Chequear vencimientos inmediatamente
+    await KanbanNotifier.checkAndNotify(_tablero);
+
+    // Y luego cada hora mientras la app siga viva en foreground
+    _dueTimer = Timer.periodic(const Duration(hours: 1), (_) async {
+      await KanbanNotifier.checkAndNotify(_tablero);
+    });
   }
 
   // ========== PRIVACIDAD POPUP ==========
@@ -389,6 +519,7 @@ class _MainShellState extends State<MainShell>
       _tablero[t.estado]!.add(t);
     });
     KanbanPrefs.saveBoard(_tablero);
+    KanbanNotifier.checkAndNotify(_tablero); // revisar vencimientos
   }
 
   void _actualizar(Tarea t) {
@@ -403,6 +534,7 @@ class _MainShellState extends State<MainShell>
       _tablero[t.estado]!.add(t);
     });
     KanbanPrefs.saveBoard(_tablero);
+    KanbanNotifier.checkAndNotify(_tablero);
   }
 
   Future<void> _eliminar(Tarea t) async {
@@ -431,6 +563,7 @@ class _MainShellState extends State<MainShell>
       _tablero[t.estado]!.removeWhere((x) => x.id == t.id);
     });
     KanbanPrefs.saveBoard(_tablero);
+    KanbanNotifier.checkAndNotify(_tablero);
   }
 
   void _moverA(Tarea t, Estado nuevo) {
@@ -440,7 +573,8 @@ class _MainShellState extends State<MainShell>
 
   // ========== STATS PARA RESUMEN ==========
   ResumenStats _buildStats() {
-    final total = _tablero.values.fold<int>(0, (acc, list) => acc + list.length);
+    final total =
+    _tablero.values.fold<int>(0, (acc, list) => acc + list.length);
     final ahora = DateTime.now();
 
     int vencidas = 0;
@@ -941,8 +1075,7 @@ class TableroScreen extends StatelessWidget {
                           child: items.isEmpty
                               ? _VacioHint(estado: e)
                               : ListView.builder(
-                            padding:
-                            const EdgeInsets.fromLTRB(
+                            padding: const EdgeInsets.fromLTRB(
                               12,
                               8,
                               12,
@@ -969,10 +1102,7 @@ class TableroScreen extends StatelessWidget {
                                   t: t,
                                   color: color,
                                   onTap: () =>
-                                      _dialogoEditar(
-                                        context,
-                                        t,
-                                      ),
+                                      _dialogoEditar(context, t),
                                   onDelete: () => onEliminar(t),
                                   onBack: () {
                                     final prev = _anterior(e);
@@ -1279,10 +1409,8 @@ class _AjustesScreenState extends State<AjustesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final labelStyle = Theme.of(context)
-        .textTheme
-        .bodyMedium
-        ?.copyWith(fontWeight: FontWeight.w600);
+    final labelStyle =
+    Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600);
 
     return Scaffold(
       appBar: AppBar(
@@ -1402,10 +1530,8 @@ class InfoAppScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final labelStyle = Theme.of(context)
-        .textTheme
-        .bodyMedium
-        ?.copyWith(fontWeight: FontWeight.w600);
+    final labelStyle =
+    Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600);
     final valueStyle = Theme.of(context).textTheme.bodyMedium;
 
     return Scaffold(
@@ -1662,8 +1788,10 @@ class _CardTarea extends StatelessWidget {
                   children: [
                     Text(
                       t.titulo,
-                      style:
-                      Theme.of(context).textTheme.titleMedium?.copyWith(
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
