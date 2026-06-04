@@ -1,25 +1,10 @@
-# Kanban Flutter
+# KanbanAPP
 
 ![Banner](assets/Tareas_Rapidas.png)
 
-Aplicación de tablero Kanban simple, rápida y sin distracciones construida con Flutter.  
-Crea tarjetas, organízalas entre las columnas **Backlog**, **En progreso** y **Hecho**, agrega fechas límite y sigue tu avance con una interfaz limpia y fluida.
+Tablero Kanban **simple, rápido y sin distracciones** construido con Flutter. Crea tareas, organízalas entre **Backlog**, **En progreso** y **Hecho**, agrega fechas límite y sigue tu avance.
 
-La app es completamente *responsive*: en móvil usa pestañas y en escritorio/web muestra múltiples columnas con arrastrar y soltar.
-
----
-
-## Características
-
-- **Tablero Kanban simple**: tres etapas claras (Backlog, En progreso, Hecho).
-- **Gestión de tareas**: crea, edita y elimina tareas con título, descripción y fecha límite.
-- **Interfaz adaptable**  
-  - **Móvil**: navegación por columnas con `TabBarView`.  
-  - **Escritorio/Web**: todas las columnas visibles y *drag & drop*.
-- **Búsqueda y ordenamiento**: por texto y por fecha de creación, vencimiento o título.
-- **Offline-first**: persistencia local con `shared_preferences`.
-- **Privacidad**: sin cuentas, sin registro, sin permisos innecesarios.
-- **Modo claro/oscuro**: se adapta al tema del sistema.
+Completamente **offline-first** — sin cuentas, sin servidores, sin permisos innecesarios. Tus datos viven en tu dispositivo.
 
 ---
 
@@ -33,22 +18,81 @@ La app es completamente *responsive*: en móvil usa pestañas y en escritorio/we
 | :---: | :---: |
 | ![3](assets/3.jpg) | ![4](assets/4.jpg) |
 
-| Tarjeta/Tarea |
-| :---: |
-| ![5](assets/5.jpg) |
+---
+
+## Características
+
+- **Tres columnas:** Backlog · En progreso · Hecho
+- **Gestión de tareas:** título, descripción y fecha límite
+- **Drag & drop** en escritorio y web
+- **Responsive:** móvil con pestañas, escritorio con columnas simultáneas
+- **Búsqueda y ordenamiento** por texto, fecha de creación, vencimiento o título
+- **Notificaciones locales** de vencimiento
+- **Modo claro / oscuro** automático según el sistema
+- **Offline-first** con `shared_preferences` — sin cuenta ni backend
+- **Privacidad total:** sin tracking, sin analytics, sin permisos innecesarios
 
 ---
 
-## Plataformas compatibles
+## Plataformas
 
-- Android · iOS · Web · Windows · macOS · Linux
+| Android | iOS | Web | Windows | macOS | Linux |
+|:-------:|:---:|:---:|:-------:|:-----:|:-----:|
+| ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ---
 
-## Cómo empezar
+## Instalación
 
-1. **Requisitos**: Instala el [SDK de Flutter](https://flutter.dev/docs/get-started/install).
-2. **Clonar el repositorio**:
-   ```sh
-   git clone https://github.com/revkelo/Kanban-Flutter.git
-   cd Kanban-Flutter/tareas_rapidas
+### Desde el APK (Android)
+
+Descarga e instala directamente `app-release.apk` incluido en el repositorio:
+
+```
+Kanban-Flutter/app-release.apk
+```
+
+### Desde el código fuente
+
+**Requisitos:** [Flutter SDK](https://flutter.dev/docs/get-started/install) 3.8+
+
+```bash
+git clone https://github.com/revkelo/Kanban-Flutter.git
+cd Kanban-Flutter/KanbanAPP
+flutter pub get
+flutter run
+```
+
+Para compilar en release:
+
+```bash
+# Android
+flutter build apk --release
+
+# Web
+flutter build web --release
+
+# Windows
+flutter build windows --release
+```
+
+---
+
+## Stack
+
+| | |
+|--|--|
+| Framework | Flutter 3.8 · Dart 3 |
+| Persistencia | `shared_preferences` |
+| Notificaciones | `flutter_local_notifications` |
+| Links externos | `url_launcher` |
+
+---
+
+## Política de privacidad
+
+Disponible en: [revkelo.github.io/Kanban-Flutter](https://revkelo.github.io/Kanban-Flutter/)
+
+---
+
+Desarrollado por **Kevin Gonzalez**
